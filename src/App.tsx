@@ -1,8 +1,11 @@
+import Dashboard from "./components/Dashboard"
 
 
 const App = () => {
   return (
-    <div>App</div>
+    <div>
+      <Dashboard />
+    </div>
   )
 }
 
