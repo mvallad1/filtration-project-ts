@@ -2,6 +2,7 @@ import { useState } from "react";
 import { data } from "../utils/data";
 import { BiSort } from "react-icons/bi";
 import { AiOutlineDown } from "react-icons/ai";
+import { BsThreeDots } from "react-icons/bs";
 
 
 const Table = () => {
@@ -50,6 +51,24 @@ const Table = () => {
               <td className="px-4 py-2">{project.email}</td>
               <td className="px-4 py-2">{project.project}</td>
 
+
+              <td className="px-4 py-2">
+                <div className="w-24 h-2 bg-gray-700-rounded">
+                    <div className="h-2 bg-green-500 rounded"></div>
+                </div>
+              </td>
+
+              <td className="px-4 py-2 w-[10rem]">
+                <span>{project.status}</span>
+              </td>
+
+              <td className="px-4 py-2">{project.date}</td>
+
+              <td className="px-4 py-2">
+                <div className="relative">
+                    <BsThreeDots />
+                </div>
+              </td>
               
             </tr>
           ))}
