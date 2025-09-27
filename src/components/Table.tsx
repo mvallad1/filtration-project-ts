@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { data } from "../utils/data";
+import { BiSort } from "react-icons/bi";
+import { AiOutlineDown } from "react-icons/ai";
 
 
 const Table = () => {
@@ -8,6 +10,17 @@ const Table = () => {
 
   return (
     <div className="p-4 w-[93%] ml-[5rem]">
+        <div className="flex items-center mb-5">
+            <div className="relative">
+                <button className="border border-gray-700 flex items-center justify-center text-white p-2 rounded">
+                    <BiSort className="mr-[0.3 rem] "/>
+                    Sort 
+                    <AiOutlineDown className="ml-2"/>
+                </button>
+            </div>
+
+        </div>
+
         <table className="min-w-full table-auto rounded border border-gray-700 text-white">
         <thead>
           <tr>
