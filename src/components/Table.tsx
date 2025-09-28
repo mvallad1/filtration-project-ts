@@ -69,7 +69,7 @@ const Table = () => {
 
             <div className="relative ml-4 w-full">
               <button onClick={() => setFilterVisible(!filterVisible)} className="border border-gray-700 flex items-center justify-center text-white p-2 rounded">
-                <MdSort className="mr-[0.3rem]" /> Filters{''} 
+                <MdSort className="mr-[0.3rem]" /> Filters 
                 <AiOutlineDown className="ml-2" />
               </button>
               
@@ -83,8 +83,43 @@ const Table = () => {
                 
                     />
                   </div>
+              
+                  <div className="mb-2">
+                    <label htmlFor="country" className="block text-white">Filter By Country: </label>
+                    <input type="text" 
+                      name="country" 
+                      className="bg-gray-900 text-white rounded p-2 w-full" 
+                
+                    />
+                  </div>
+                  <div className="mb-2">
+                    <label htmlFor="email" className="block text-white">Filter By Email: </label>
+                    <input type="text" 
+                      name="email" 
+                      className="bg-gray-900 text-white rounded p-2 w-full" 
+                
+                    />
+                  </div>
+                  <div className="mb-2">
+                    <label htmlFor="project" className="block text-white">Filter By Projects: </label>
+                    <input type="text" 
+                      name="projecy" 
+                      className="bg-gray-900 text-white rounded p-2 w-full" 
+                
+                    />
+                  </div>
+                  <div className="mb-2">
+                    <label htmlFor="status" className="block text-white">Filter By Status: </label>
+                    <input type="text" 
+                      name="status" 
+                      className="bg-gray-900 text-white rounded p-2 w-full" 
+                
+                    />
+                  </div>
+
+
                 </div>
-        )}
+              )}
 
             </div>
 
