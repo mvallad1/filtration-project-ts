@@ -12,6 +12,17 @@ const Table = () => {
   const [sortConfig, setSortConfig] = useState<{key: string; direction: string;} | null>(null);
   const [filterVisible, setFilterVisible] = useState<boolean>(false);
 
+  const [filters, setFilters] = useState({
+    name: '',
+    country: '',
+    email: '',
+    project: '',
+    status: '',
+  });
+
+  const [searchQuery, setSearchQuery] = useState('');
+
+
   const sortProjects = (key: string) => {
     let sortedProjects = [...projects];
 
@@ -32,6 +43,42 @@ const Table = () => {
     setDropDownVisible(false);
   };
  
+  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFilters({
+      ...filters,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const filteredProjects = projects.filter((project) => (
+    searchQuery === '' || 
+    Object.values(project).some((value) => 
+      value.toLowerCase().includes(searchQuery.toLowerCase())))
+      && 
+      filters.name === '' || 
+      project.country.toLowerCase().includes(filters.country.toLowerCase()) 
+      && 
+      filters.email === '' || 
+      project.email.toLowerCase().includes(filters.email.toLowerCase())
+      &&
+      filters.project === '' || 
+      project.project.toLowerCase().includes(filters.project.toLowerCase())
+      &&
+      filters.status === '' || 
+      project.status.toLowerCase().includes(filters.status.toLowerCase())
+    
+  );
+
+  //Pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentProjects = filteredProjects.slice(startIndex, startIndex + itemsPerPage);
+  const totalPages = Math.ceil(filteredProjects.length / itemsPerPage);
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+  };
 
   return (
     <div className="p-4 w-[93%] ml-[5rem]">
@@ -80,7 +127,8 @@ const Table = () => {
                     <input type="text" 
                       name="name" 
                       className="bg-gray-900 text-white rounded p-2 w-full" 
-                
+                      value={filters.name}
+                      onChange={handleFilterChange}
                     />
                   </div>
               
@@ -89,7 +137,8 @@ const Table = () => {
                     <input type="text" 
                       name="country" 
                       className="bg-gray-900 text-white rounded p-2 w-full" 
-                
+                      value={filters.country}
+                      onChange={handleFilterChange}
                     />
                   </div>
                   <div className="mb-2">
@@ -97,7 +146,8 @@ const Table = () => {
                     <input type="text" 
                       name="email" 
                       className="bg-gray-900 text-white rounded p-2 w-full" 
-                
+                      value={filters.email}
+                      onChange={handleFilterChange}
                     />
                   </div>
                   <div className="mb-2">
@@ -105,7 +155,8 @@ const Table = () => {
                     <input type="text" 
                       name="projecy" 
                       className="bg-gray-900 text-white rounded p-2 w-full" 
-                
+                      value={filters.project}
+                      onChange={handleFilterChange}
                     />
                   </div>
                   <div className="mb-2">
@@ -113,7 +164,8 @@ const Table = () => {
                     <input type="text" 
                       name="status" 
                       className="bg-gray-900 text-white rounded p-2 w-full" 
-                
+                      value={filters.status}
+                      onChange={handleFilterChange}
                     />
                   </div>
 
@@ -142,7 +194,7 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {projects.map((project, index) => (
+          {currentProjects.map((project, index) => (
             <tr key={index} className="border border-gray-700">
               <td className="px-4 py-2">
                 <img
@@ -182,13 +234,13 @@ const Table = () => {
 
       {/*pagination*/}
       <div className="flex justify-end mt-4">
-        <button className="px-4 py-2 bg-gray-700 text-white rounded mr-2 disabled:opacity-50">
+        <button disabled={currentPage === 1 ? true : false} onClick={() => handlePageChange(currentPage - 1)} className="px-4 py-2 bg-gray-700 text-white rounded mr-2 disabled:opacity-50">
           Previous
         </button>
 
-        <span className="px-4 py-2 text-whoite">Page 1 Of 4</span>
+        <span className="px-4 py-2 font-bold text-white">Page {currentPage} Of {totalPages}</span>
 
-        <button className="px-4 py-2 bg-gray-700 text-white rounded mr-2 disabled:opacity-50">
+        <button disabled={currentPage === totalPages ? true : false} onClick={() => handlePageChange(currentPage + 1)}  className="px-4 py-2 bg-gray-700 text-white rounded mr-2 disabled:opacity-50">
           Next
         </button>
 
