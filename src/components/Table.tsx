@@ -50,23 +50,26 @@ const Table = () => {
     });
   };
 
-  const filteredProjects = projects.filter((project) => (
-    searchQuery === '' || 
-    Object.values(project).some((value) => 
-      value.toLowerCase().includes(searchQuery.toLowerCase())))
-      && 
-      filters.name === '' || 
-      project.country.toLowerCase().includes(filters.country.toLowerCase()) 
-      && 
-      filters.email === '' || 
-      project.email.toLowerCase().includes(filters.email.toLowerCase())
-      &&
-      filters.project === '' || 
-      project.project.toLowerCase().includes(filters.project.toLowerCase())
-      &&
-      filters.status === '' || 
-      project.status.toLowerCase().includes(filters.status.toLowerCase())
-    
+  const filteredProjects = projects.filter(
+    (project) =>
+      (searchQuery === "" ||
+        Object.values(project).some((value) =>
+          value.toLowerCase().includes(searchQuery.toLowerCase())
+        )) &&
+      (filters.name === "" ||
+        project.client.toLowerCase().includes(filters.name.toLowerCase())) &&
+      (filters.country === "" ||
+        project.country
+          .toLowerCase()
+          .includes(filters.country.toLowerCase())) &&
+      (filters.email === "" ||
+        project.email.toLowerCase().includes(filters.email.toLowerCase())) &&
+      (filters.project === "" ||
+        project.project
+          .toLowerCase()
+          .includes(filters.project.toLowerCase())) &&
+      (filters.status === "" ||
+        project.status.toLowerCase().includes(filters.status.toLowerCase()))
   );
 
   //Pagination
