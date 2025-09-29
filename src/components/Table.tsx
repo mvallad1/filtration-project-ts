@@ -74,7 +74,7 @@ const Table = () => {
 
   //Pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 10;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentProjects = filteredProjects.slice(startIndex, startIndex + itemsPerPage);
   const totalPages = Math.ceil(filteredProjects.length / itemsPerPage);
